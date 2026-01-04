@@ -2,31 +2,34 @@ version: 2
 
 models:
   - name: stg_ecommerce__products
-    description: ""
+    description: " This table contains product details available in the e-commerce platform."
     columns:
       - name: product_id
-        description: ""
+        description: "unique identifier for each product"
+        tests:
+          - unique
+          - not_null
 
       - name: cost
-        description: ""
+        description: "cost of the product"
 
       - name: category
-        description: ""
+        description: "category of the product"
 
       - name: name
-        description: ""
+        description: "name of the product"
 
       - name: brand
-        description: ""
+        description: "brand of the product"
 
       - name: retail_price
-        description: ""
+        description: "retail price of the product"
 
       - name: department
-        description: ""
+        description: "department of the product"
 
       - name: sku
-        description: ""
+        description: "stock keeping unit of the product"
 
       - name: distribution_center_id
-        description: ""
+        description: "unique identifier for each distribution center"

@@ -25,6 +25,9 @@ models:
 
       - name: returned_at
         description: "timestamp when the order was returned"
+        tests:
+          - not_null:
+              where: "status = 'Returned'"
 
       - name: shipped_at
         description: "timestamp when the order was shipped"

@@ -2,37 +2,54 @@ version: 2
 
 models:
   - name: stg_ecommerce__order_items
-    description: ""
+    description: "This table contains order item details for each order placed in the e-commerce platform."
     columns:
       - name: order_item_id
-        description: ""
+        description: "unique identifier for each order item"
+        tests:
+          - unique
+          - not_null
 
       - name: order_id
-        description: ""
+        description: "unique identifier for each order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
 
       - name: user_id
-        description: ""
+        description: "unique identifier for each user"
 
       - name: product_id
-        description: ""
+        description: "unique identifier for each product"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__products')
+              field: product_id
 
       - name: inventory_item_id
-        description: ""
+        description: "unique identifier for each inventory item"
 
       - name: status
-        description: ""
+        description: "status of the order item"
+        tests:
+          - not_null
 
       - name: created_at
-        description: ""
+        description: "timestamp when the order item was created"
 
       - name: shipped_at
-        description: ""
+        description: "timestamp when the order item was shipped"
 
       - name: delivered_at
-        description: ""
+        description: "timestamp when the order item was delivered"
 
       - name: returned_at
-        description: ""
+        description: "timestamp when the order item was returned"
 
       - name: sale_price
-        description: ""
+        description: "sale price of the order item"
+        tests:
+          - not_null
