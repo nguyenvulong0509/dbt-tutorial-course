@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: "records of orders placed by users on the e-commerce platform"
+    columns:
+      - name: order_id
+        description: "unique identifier for each order"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+
+      - name: order_created_at
+        description: "timestamp when the order was created"
+        tests:
+          - not_null
+
+      - name: order_shipped_at
+        description: "timestamp when the order was shipped"
+        tests:
+          - not_null
+
+      - name: order_delivered_at
+        description: "timestamp when the order was delivered"
+        tests:
+          - not_null
+
+      - name: order_returned_at
+        description: "timestamp when the order was returned"
+
+      - name: order_status
+        description: "status of the order"
+
+      - name: num_items_ordered
+        description: "number of items in the order"
+
+      - name: total_sale_price
+        description: "total sales price of all items in the order"
+
+      - name: total_product_cost
+        description: ""
+
+      - name: total_profit
+        description: "total profit of all items in the order"
+
+      - name: total_discount
+        description: ""

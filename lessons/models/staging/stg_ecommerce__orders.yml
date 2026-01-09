@@ -35,5 +35,5 @@ models:
       - name: delivered_at
         description: "timestamp when the order was delivered"
 
-      - name: num_of_item
+      - name: num_items_ordered
         description: "number of items in the order"
