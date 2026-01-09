@@ -18,6 +18,6 @@ SELECT
 	p.product_retail_price,
 	oi.item_sales_price - p.product_cost AS item_profit,
 	p.product_retail_price - oi.item_sales_price AS item_discount
-FROM {{ ref ('stg_ecommerce__order_items')}} oi
+FROM {{ ref('stg_ecommerce__order_items')}} oi
 	LEFT JOIN products p
 		ON oi.product_id = p.product_id

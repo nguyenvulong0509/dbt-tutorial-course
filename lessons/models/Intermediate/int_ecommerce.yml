@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: int_ecommerce__order_items_products
+    description: ""
+    columns:
+      - name: order_item_id
+        description: ""
+        tests:
+          - unique:
+                config:
+                    severity: error
+          - not_null:
+                config:
+                    severity: error
+
+      - name: order_id
+        description: ""
+        tests:
+          - not_null:
+              config:
+                  severity: error
+
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: product_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: item_sales_price
+        description: ""
+
+      - name: product_department
+        description: ""
+
+      - name: product_cost
+        description: ""
+
+      - name: product_retail_price
+        description: ""
+
+      - name: item_profit
+        description: ""
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "= (item_sales_price - product_cost)"
+
+      - name: item_discount
+        description: ""
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "= (product_retail_price - item_sales_price)"
