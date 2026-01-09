@@ -39,6 +39,8 @@ models:
 
 tests:
   lessons:
+    +store_failures: true
     +severity: warn
     marts:
       +severity: error
+

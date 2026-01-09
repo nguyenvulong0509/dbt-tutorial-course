@@ -7,11 +7,7 @@ models:
       - name: product_id
         description: "unique identifier for each product"
         tests:
-          - unique:
-              config:
-                severity: error
-          - not_null:
-              config:
+          - primary_key:
                 severity: error
 
       - name: cost
