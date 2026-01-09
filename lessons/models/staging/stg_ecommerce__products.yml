@@ -7,11 +7,19 @@ models:
       - name: product_id
         description: "unique identifier for each product"
         tests:
-          - unique
-          - not_null
+          - unique:
+              config:
+                severity: error
+          - not_null:
+              config:
+                severity: error
 
       - name: cost
         description: "cost of the product"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
 
       - name: category
         description: "category of the product"
@@ -24,9 +32,23 @@ models:
 
       - name: retail_price
         description: "retail price of the product"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+          - dbt_utils.expression_is_true:
+              name: retail_price_greater_than_cost
+              expression: ">= cost"
+              where: "retail_price IS NOT NULL"
 
       - name: department
         description: "department of the product"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "Men"
+              quote: true
 
       - name: sku
         description: "stock keeping unit of the product"
