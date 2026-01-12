@@ -2,16 +2,14 @@ version: 2
 
 models:
   - name: stg_ecommerce__order_items
-    description: "This table contains order item details for each order placed in the e-commerce platform."
+    description: "Line items from orders"
     columns:
       - name: order_item_id
-        description: "unique identifier for each order item"
         tests:
-          - unique
-          - not_null
+          - primary_key:
+              severity: error
 
       - name: order_id
-        description: "unique identifier for each order"
         tests:
           - not_null
           - relationships:
@@ -19,37 +17,19 @@ models:
               field: order_id
 
       - name: user_id
-        description: "unique identifier for each user"
+        tests:
+          - not_null
 
       - name: product_id
-        description: "unique identifier for each product"
         tests:
           - not_null
           - relationships:
               to: ref('stg_ecommerce__products')
               field: product_id
 
-      - name: inventory_item_id
-        description: "unique identifier for each inventory item"
-
-      - name: status
-        description: "status of the order item"
-        tests:
-          - not_null
-
-      - name: created_at
-        description: "timestamp when the order item was created"
-
-      - name: shipped_at
-        description: "timestamp when the order item was shipped"
-
-      - name: delivered_at
-        description: "timestamp when the order item was delivered"
-
-      - name: returned_at
-        description: "timestamp when the order item was returned"
-
       - name: item_sales_price
-        description: "sale price of the order item"
+        description: "How much the item sold for"
         tests:
           - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
