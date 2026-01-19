@@ -36,6 +36,8 @@ models:
       relation: true
       columns: true
     +hours_to_expiration: 168
+    Intermediate:
+      +tags: ['my_tag', 'my_other_tag']
 
 tests:
   lessons:

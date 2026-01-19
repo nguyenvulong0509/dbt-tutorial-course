@@ -3,6 +3,7 @@ WITH order_details AS (
 		order_id,
 		COUNT(*) as num_of_items_in_order
 	FROM {{ ref('stg_ecommerce__order_items') }}
+	GROUP BY 1
 )
 
 SELECT
@@ -14,4 +15,4 @@ FROM {{ ref('stg_ecommerce__orders') }} o
 		USING (order_id)
 WHERE o.order_id IS NULL
 	OR od.order_id IS NULL
-	OR o.num_of_items <> od.num_of_items_in_order
+	OR o.num_items_ordered <> od.num_of_items_in_order
